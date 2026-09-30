@@ -855,44 +855,59 @@ en cada fila.</p>
 </tr>
 </thead>
 <tbody>
-<tr class="row-even"><td><p>ARRANCAPLUMAS</p></td>
-<td><p>21237020</p></td>
-<td><p>Alto Magdalena</p></td>
-<td><p>1934-2014</p></td>
+<tr class="row-even"><td><p>Estacion</p></td>
+<td><p>Codigo</p></td>
+<td><p>Municipio</p></td>
+<td><p>Departamento</p></td>
 </tr>
-<tr class="row-odd"><td><p>PUERTO SALGAR</p></td>
+<tr class="row-odd"><td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+<td><p>—</p></td>
+</tr>
+<tr class="row-even"><td><p>ARRANCAPLUMAS - AUT</p></td>
+<td><p>21237020</p></td>
+<td><p>Guaduas</p></td>
+<td><p>Cundinamarca</p></td>
+</tr>
+<tr class="row-odd"><td><p>PUERTO SALGAR - AUT</p></td>
 <td><p>23037010</p></td>
-<td><p>Alto-medio Magdalena</p></td>
-<td><p>1937-2026</p></td>
+<td><p>Puerto Salgar</p></td>
+<td><p>Cundinamarca</p></td>
 </tr>
 <tr class="row-even"><td><p>TRES CRUCES</p></td>
 <td><p>25027640</p></td>
-<td><p>Depresion momposina</p></td>
-<td><p>1974-2026</p></td>
+<td><p>Achi</p></td>
+<td><p>Bolivar</p></td>
 </tr>
-<tr class="row-odd"><td><p>EL BANCO</p></td>
+<tr class="row-odd"><td><p>EL BANCO - AUT</p></td>
 <td><p>25027020</p></td>
-<td><p>Bajo Magdalena</p></td>
-<td><p>1972-2026</p></td>
+<td><p>El Banco</p></td>
+<td><p>Magdalena</p></td>
 </tr>
 <tr class="row-even"><td><p>SAN ROQUE</p></td>
 <td><p>25027320</p></td>
-<td><p>Depresion momposina</p></td>
-<td><p>1972-2025</p></td>
+<td><p>El Banco</p></td>
+<td><p>Magdalena</p></td>
 </tr>
 <tr class="row-odd"><td><p>COYONGAL</p></td>
 <td><p>25027930</p></td>
-<td><p>Bajo Magdalena</p></td>
-<td><p>1975-2026</p></td>
+<td><p>Magangue</p></td>
+<td><p>Bolivar</p></td>
 </tr>
 <tr class="row-even"><td><p><strong>CALAMAR</strong></p></td>
 <td><p><strong>29037020</strong></p></td>
-<td><p><strong>Bajo Magdalena (objetivo)</strong></p></td>
-<td><p><strong>1940-2026</strong></p></td>
+<td><p><strong>Calamar</strong></p></td>
+<td><p><strong>Bolivar</strong></p></td>
 </tr>
 </tbody>
 </table>
-<p><em>[COMPLETAR: municipio, departamento y coordenadas de cada estacion segun su ficha en DHIME]</em></p>
+<p>Coordenadas en grados decimales, sistema <strong>WGS 84</strong>. Fuente: Catalogo Nacional de
+Estaciones del IDEAM, consultado el 30 de septiembre de 2026.</p>
+<p>El <strong>gradiente altitudinal</strong> -de 222 m s.n.m. en Guaduas a 8 m en Calamar- define el
+ordenamiento longitudinal de las estaciones sobre el cauce, y se utiliza en 2.6 para
+<strong>validar de forma independiente</strong> los tiempos de transito estimados a partir de las
+series de caudal.</p>
 </section>
 </section>
 <section id="estructura-de-los-datos">
@@ -2632,7 +2647,7 @@ HUECOS EN LA ESTACION OBJETIVO
 </div>
 </div>
 <div class="cell_output docutils container">
-<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Qclem\AppData\Local\Temp\ipykernel_11836\2101752813.py:7: InterpolationWarning: The test statistic is outside of the range of p-values available in the
+<div class="output stderr highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>C:\Users\Qclem\AppData\Local\Temp\ipykernel_736\2101752813.py:7: InterpolationWarning: The test statistic is outside of the range of p-values available in the
 look-up table. The actual p-value is greater than the p-value returned.
 
   p_kpss = kpss(sd, regression=&quot;c&quot;, nlags=&quot;auto&quot;)[1]
@@ -2706,6 +2721,103 @@ arrancaplumas             20         0.4665         0.3595    0.1070
 <img alt="_images/8c54d05d1ba76b8f538e89d73625f5d8a4169ef2b2289257aeb1992920f516ea.png" src="_images/8c54d05d1ba76b8f538e89d73625f5d8a4169ef2b2289257aeb1992920f516ea.png" />
 </div>
 </div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># ---------------------------------------------------------------------</span>
+<span class="c1"># VALIDACION INDEPENDIENTE del tiempo de transito</span>
+<span class="c1"># Los rezagos de 2.6 se estimaron SOLO con las series de caudal, sin</span>
+<span class="c1"># usar ninguna informacion geografica. Si son correctos, deben reproducir</span>
+<span class="c1"># el ordenamiento fisico de las estaciones sobre el cauce.</span>
+<span class="c1"># ---------------------------------------------------------------------</span>
+<span class="n">ubic</span> <span class="o">=</span> <span class="n">pd</span><span class="o">.</span><span class="n">read_csv</span><span class="p">(</span><span class="n">DATOS_CRUDOS</span><span class="o">.</span><span class="n">parent</span><span class="o">/</span><span class="s2">&quot;UBICACION_ESTACIONES_DESCARGADAS_IDEAM.csv&quot;</span><span class="p">,</span>
+                   <span class="n">sep</span><span class="o">=</span><span class="s2">&quot;;&quot;</span><span class="p">,</span> <span class="n">encoding</span><span class="o">=</span><span class="s2">&quot;utf-8-sig&quot;</span><span class="p">)</span>
+<span class="n">ubic</span><span class="o">.</span><span class="n">columns</span> <span class="o">=</span> <span class="p">[</span><span class="s2">&quot;estacion&quot;</span><span class="p">,</span><span class="s2">&quot;codigo&quot;</span><span class="p">,</span><span class="s2">&quot;departamento&quot;</span><span class="p">,</span><span class="s2">&quot;municipio&quot;</span><span class="p">,</span><span class="s2">&quot;lat&quot;</span><span class="p">,</span><span class="s2">&quot;lon&quot;</span><span class="p">,</span><span class="s2">&quot;altitud&quot;</span><span class="p">]</span>
+<span class="n">MAPA</span> <span class="o">=</span> <span class="p">{</span><span class="s2">&quot;ARRANCAPLUMAS - AUT&quot;</span><span class="p">:</span><span class="s2">&quot;arrancaplumas&quot;</span><span class="p">,</span> <span class="s2">&quot;PUERTO SALGAR - AUT&quot;</span><span class="p">:</span><span class="s2">&quot;pto_salgar&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;TRES CRUCES&quot;</span><span class="p">:</span><span class="s2">&quot;tres_cruces&quot;</span><span class="p">,</span> <span class="s2">&quot;COYONGAL&quot;</span><span class="p">:</span><span class="s2">&quot;coyongal&quot;</span><span class="p">,</span>
+        <span class="s2">&quot;EL BANCO - AUT&quot;</span><span class="p">:</span><span class="s2">&quot;el_banco&quot;</span><span class="p">,</span> <span class="s2">&quot;SAN ROQUE&quot;</span><span class="p">:</span><span class="s2">&quot;san_roque&quot;</span><span class="p">,</span> <span class="s2">&quot;CALAMAR&quot;</span><span class="p">:</span><span class="s2">&quot;calamar&quot;</span><span class="p">}</span>
+<span class="n">ubic</span><span class="p">[</span><span class="s2">&quot;clave&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ubic</span><span class="o">.</span><span class="n">estacion</span><span class="o">.</span><span class="n">map</span><span class="p">(</span><span class="n">MAPA</span><span class="p">)</span>
+<span class="n">ubic</span><span class="p">[</span><span class="s2">&quot;transito_dias&quot;</span><span class="p">]</span> <span class="o">=</span> <span class="n">ubic</span><span class="o">.</span><span class="n">clave</span><span class="o">.</span><span class="n">map</span><span class="p">({</span><span class="o">**</span><span class="n">TRANSITOS</span><span class="p">,</span> <span class="n">ESTACION_OBJETIVO</span><span class="p">:</span> <span class="mi">0</span><span class="p">})</span>
+
+<span class="n">g</span> <span class="o">=</span> <span class="n">ubic</span><span class="o">.</span><span class="n">dropna</span><span class="p">(</span><span class="n">subset</span><span class="o">=</span><span class="p">[</span><span class="s2">&quot;transito_dias&quot;</span><span class="p">])</span><span class="o">.</span><span class="n">sort_values</span><span class="p">(</span><span class="s2">&quot;transito_dias&quot;</span><span class="p">,</span> <span class="n">ascending</span><span class="o">=</span><span class="kc">False</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;PERFIL LONGITUDINAL Y TIEMPO DE TRANSITO</span><span class="se">\n</span><span class="s2">&quot;</span><span class="p">)</span>
+<span class="nb">print</span><span class="p">(</span><span class="n">g</span><span class="p">[[</span><span class="s2">&quot;estacion&quot;</span><span class="p">,</span><span class="s2">&quot;municipio&quot;</span><span class="p">,</span><span class="s2">&quot;departamento&quot;</span><span class="p">,</span><span class="s2">&quot;altitud&quot;</span><span class="p">,</span><span class="s2">&quot;lat&quot;</span><span class="p">,</span><span class="s2">&quot;transito_dias&quot;</span><span class="p">]]</span>
+      <span class="o">.</span><span class="n">to_string</span><span class="p">(</span><span class="n">index</span><span class="o">=</span><span class="kc">False</span><span class="p">))</span>
+
+<span class="nb">print</span><span class="p">(</span><span class="s2">&quot;</span><span class="se">\n</span><span class="s2">CORRELACION ENTRE EL TRANSITO ESTIMADO Y LA GEOGRAFIA REAL&quot;</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">col</span><span class="p">,</span> <span class="n">nom</span> <span class="ow">in</span> <span class="p">[(</span><span class="s2">&quot;altitud&quot;</span><span class="p">,</span><span class="s2">&quot;altitud&quot;</span><span class="p">),</span> <span class="p">(</span><span class="s2">&quot;lat&quot;</span><span class="p">,</span><span class="s2">&quot;latitud&quot;</span><span class="p">)]:</span>
+    <span class="n">r</span><span class="p">,</span> <span class="n">p</span>   <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">pearsonr</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="n">g</span><span class="o">.</span><span class="n">transito_dias</span><span class="p">)</span>
+    <span class="n">rs</span><span class="p">,</span> <span class="n">ps</span> <span class="o">=</span> <span class="n">st</span><span class="o">.</span><span class="n">spearmanr</span><span class="p">(</span><span class="n">g</span><span class="p">[</span><span class="n">col</span><span class="p">],</span> <span class="n">g</span><span class="o">.</span><span class="n">transito_dias</span><span class="p">)</span>
+    <span class="nb">print</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;  transito vs </span><span class="si">{</span><span class="n">nom</span><span class="si">:</span><span class="s2">8</span><span class="si">}</span><span class="s2">  Pearson r = </span><span class="si">{</span><span class="n">r</span><span class="si">:</span><span class="s2">+.4f</span><span class="si">}</span><span class="s2"> (p = </span><span class="si">{</span><span class="n">p</span><span class="si">:</span><span class="s2">.4f</span><span class="si">}</span><span class="s2">)   &quot;</span>
+          <span class="sa">f</span><span class="s2">&quot;Spearman = </span><span class="si">{</span><span class="n">rs</span><span class="si">:</span><span class="s2">+.4f</span><span class="si">}</span><span class="s2">&quot;</span><span class="p">)</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<div class="output stream highlight-myst-ansi notranslate"><div class="highlight"><pre><span></span>PERFIL LONGITUDINAL Y TIEMPO DE TRANSITO
+
+           estacion     municipio departamento  altitud       lat  transito_dias
+PUERTO SALGAR - AUT Puerto Salgar Cundinamarca      168  5.469667             21
+ARRANCAPLUMAS - AUT       Guaduas Cundinamarca      222  5.202417             20
+        TRES CRUCES          Achi      Bolivar       31  8.703083             16
+     EL BANCO - AUT      El Banco    Magdalena       29  8.992528             12
+          SAN ROQUE      El Banco    Magdalena       24  9.071622             10
+           COYONGAL      Magangue      Bolivar       20  8.915130              7
+            CALAMAR       Calamar      Bolivar        8 10.244042              0
+
+CORRELACION ENTRE EL TRANSITO ESTIMADO Y LA GEOGRAFIA REAL
+  transito vs altitud   Pearson r = +0.7865 (p = 0.0359)   Spearman = +0.9643
+  transito vs latitud   Pearson r = -0.8758 (p = 0.0098)   Spearman = -0.8571
+</pre></div>
+</div>
+</div>
+</div>
+<div class="cell docutils container">
+<div class="cell_input docutils container">
+<div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="n">fig</span><span class="p">,</span> <span class="n">ax</span> <span class="o">=</span> <span class="n">plt</span><span class="o">.</span><span class="n">subplots</span><span class="p">(</span><span class="mi">1</span><span class="p">,</span> <span class="mi">2</span><span class="p">,</span> <span class="n">figsize</span><span class="o">=</span><span class="p">(</span><span class="mi">13</span><span class="p">,</span> <span class="mf">4.2</span><span class="p">))</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">altitud</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">transito_dias</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">70</span><span class="p">,</span> <span class="n">color</span><span class="o">=</span><span class="s2">&quot;sienna&quot;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">clave</span><span class="p">,</span> <span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">altitud</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">transito_dias</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mf">7.5</span><span class="p">,</span>
+                   <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">5</span><span class="p">,</span><span class="mi">4</span><span class="p">),</span> <span class="n">textcoords</span><span class="o">=</span><span class="s2">&quot;offset points&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Altitud de la estacion (m s.n.m.)&quot;</span><span class="p">,</span>
+          <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Tiempo de transito estimado (dias)&quot;</span><span class="p">,</span>
+          <span class="n">title</span><span class="o">=</span><span class="s2">&quot;(a) Transito frente a altitud&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">0</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">.3</span><span class="p">)</span>
+
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">scatter</span><span class="p">(</span><span class="n">g</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span> <span class="n">g</span><span class="o">.</span><span class="n">lat</span><span class="p">,</span> <span class="n">s</span><span class="o">=</span><span class="mi">90</span><span class="p">,</span> <span class="n">c</span><span class="o">=</span><span class="n">g</span><span class="o">.</span><span class="n">transito_dias</span><span class="p">,</span> <span class="n">cmap</span><span class="o">=</span><span class="s2">&quot;viridis_r&quot;</span><span class="p">,</span> <span class="n">zorder</span><span class="o">=</span><span class="mi">3</span><span class="p">)</span>
+<span class="k">for</span> <span class="n">_</span><span class="p">,</span> <span class="n">r</span> <span class="ow">in</span> <span class="n">g</span><span class="o">.</span><span class="n">iterrows</span><span class="p">():</span>
+    <span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">annotate</span><span class="p">(</span><span class="sa">f</span><span class="s2">&quot;</span><span class="si">{</span><span class="n">r</span><span class="o">.</span><span class="n">clave</span><span class="si">}</span><span class="se">\n</span><span class="si">{</span><span class="nb">int</span><span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">transito_dias</span><span class="p">)</span><span class="si">}</span><span class="s2"> d&quot;</span><span class="p">,</span> <span class="p">(</span><span class="n">r</span><span class="o">.</span><span class="n">lon</span><span class="p">,</span> <span class="n">r</span><span class="o">.</span><span class="n">lat</span><span class="p">),</span> <span class="n">fontsize</span><span class="o">=</span><span class="mi">7</span><span class="p">,</span>
+                   <span class="n">xytext</span><span class="o">=</span><span class="p">(</span><span class="mi">6</span><span class="p">,</span><span class="o">-</span><span class="mi">3</span><span class="p">),</span> <span class="n">textcoords</span><span class="o">=</span><span class="s2">&quot;offset points&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">set</span><span class="p">(</span><span class="n">xlabel</span><span class="o">=</span><span class="s2">&quot;Longitud (grados W)&quot;</span><span class="p">,</span> <span class="n">ylabel</span><span class="o">=</span><span class="s2">&quot;Latitud (grados N)&quot;</span><span class="p">,</span>
+          <span class="n">title</span><span class="o">=</span><span class="s2">&quot;(b) Disposicion geografica de las estaciones&quot;</span><span class="p">)</span>
+<span class="n">ax</span><span class="p">[</span><span class="mi">1</span><span class="p">]</span><span class="o">.</span><span class="n">grid</span><span class="p">(</span><span class="n">alpha</span><span class="o">=</span><span class="mf">.3</span><span class="p">)</span>
+<span class="n">plt</span><span class="o">.</span><span class="n">tight_layout</span><span class="p">();</span> <span class="n">plt</span><span class="o">.</span><span class="n">savefig</span><span class="p">(</span><span class="n">FIGURAS</span><span class="o">/</span><span class="s2">&quot;validacion_geografica.png&quot;</span><span class="p">,</span> <span class="n">dpi</span><span class="o">=</span><span class="mi">150</span><span class="p">);</span> <span class="n">plt</span><span class="o">.</span><span class="n">show</span><span class="p">()</span>
+</pre></div>
+</div>
+</div>
+<div class="cell_output docutils container">
+<img alt="_images/8cba2a21a42bd59051eac030761ecd6e94a91b05091adada05f78bc3bcb53e68.png" src="_images/8cba2a21a42bd59051eac030761ecd6e94a91b05091adada05f78bc3bcb53e68.png" />
+</div>
+</div>
+<p><strong>Validacion independiente del tiempo de transito.</strong> Los rezagos de la subseccion
+anterior se estimaron <strong>exclusivamente a partir de las series de caudal</strong>, por correlacion
+cruzada, sin incorporar ninguna informacion geografica. Contrastarlos contra la ubicacion
+real de las estaciones constituye por tanto una <strong>verificacion externa</strong> del resultado.</p>
+<p>La correspondencia es muy alta: el tiempo de transito estimado crece de forma casi
+monotona con la <strong>altitud</strong> de la estacion y decrece con la <strong>latitud</strong>, es decir,
+reproduce el ordenamiento fisico de los puntos de medicion a lo largo del cauce, desde
+Guaduas (222 m s.n.m., Cundinamarca) hasta Calamar (8 m s.n.m., Bolivar).</p>
+<blockquote>
+<div><p><strong>Interpretacion.</strong> Que un procedimiento puramente estadistico recupere la geografia del
+rio sin haberla visto indica que los rezagos capturan un <strong>proceso fisico real</strong> -la
+propagacion de la onda de crecida- y no un artefacto de la autocorrelacion de las series.
+Esto respalda la decision de 2.9 de asignar a cada estacion su rezago empirico como
+predictor.</p>
+</div></blockquote>
+<p>La unica inversion respecto al orden estricto corresponde a <strong>Arrancaplumas y Puerto
+Salgar</strong>, cuyos transitos estimados (20 y 21 dias) son practicamente identicos pese a
+diferir en altitud. Es coherente: ambas se situan en el mismo tramo del alto Magdalena,
+separadas por pocos kilometros, y su correlacion con Calamar es la mas baja del conjunto
+(r &lt; 0,47), de modo que la estimacion del rezago es alli menos precisa.</p>
 <div class="cell docutils container">
 <div class="cell_input docutils container">
 <div class="highlight-ipython3 notranslate"><div class="highlight"><pre><span></span><span class="c1"># Deriva temporal: covariate shift y concept drift</span>
