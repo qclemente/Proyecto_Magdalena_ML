@@ -306,7 +306,13 @@ document.write(`
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tema">Tema</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ruta-metodologica">Ruta metodologica</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estructura-del-informe">Estructura del informe</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reproducibilidad">Reproducibilidad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reproducibilidad">Reproducibilidad</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#semillas-aleatorias">Semillas aleatorias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entorno">Entorno</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#archivo-de-dependencias">Archivo de dependencias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reproducir-el-analisis">Reproducir el analisis</a></li>
+</ul>
+</li>
 </ul>
             </nav>
         </div>
@@ -369,17 +375,89 @@ En consecuencia:</p>
 </section>
 <section id="reproducibilidad">
 <h2>Reproducibilidad<a class="headerlink" href="#reproducibilidad" title="Permalink to this heading">#</a></h2>
-<ul class="simple">
-<li><p>Semilla global: <strong>42</strong> (definida en <code class="docutils literal notranslate"><span class="pre">src/config.py</span></code>).</p></li>
-<li><p>Dependencias: <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code> y <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code>.</p></li>
-<li><p>Entorno: conda <code class="docutils literal notranslate"><span class="pre">ml_venv</span></code>, Python 3.9.23.</p></li>
-</ul>
-<p>Para reproducir:</p>
-<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>activate<span class="w"> </span>ml_venv
+<p>Los tres elementos que exige el entregable -archivo de dependencias, semillas
+aleatorias fijadas y acceso a los datos- se documentan integramente en estas paginas.</p>
+<section id="semillas-aleatorias">
+<h3>Semillas aleatorias<a class="headerlink" href="#semillas-aleatorias" title="Permalink to this heading">#</a></h3>
+<p>Semilla global <strong><code class="docutils literal notranslate"><span class="pre">SEED</span> <span class="pre">=</span> <span class="pre">42</span></code></strong>, fijada al inicio del informe sobre <code class="docutils literal notranslate"><span class="pre">random</span></code>, <code class="docutils literal notranslate"><span class="pre">numpy</span></code>
+y <code class="docutils literal notranslate"><span class="pre">PYTHONHASHSEED</span></code>, y propagada a todo componente estocastico: <code class="docutils literal notranslate"><span class="pre">LogisticRegression</span></code>,
+<code class="docutils literal notranslate"><span class="pre">DummyClassifier</span></code>, <code class="docutils literal notranslate"><span class="pre">PCA</span></code>, <code class="docutils literal notranslate"><span class="pre">MinCovDet</span></code>, <code class="docutils literal notranslate"><span class="pre">mutual_info_classif</span></code>, el remuestreo bootstrap y
+las particiones de validacion cruzada.</p>
+<p>Parametros de diseno fijados de antemano:</p>
+<table class="table">
+<thead>
+<tr class="row-odd"><th class="head"><p>Parametro</p></th>
+<th class="head"><p>Valor</p></th>
+</tr>
+</thead>
+<tbody>
+<tr class="row-even"><td><p>Semilla global</p></td>
+<td><p>42</p></td>
+</tr>
+<tr class="row-odd"><td><p>Fecha de corte train/test</p></td>
+<td><p>2010-01-01</p></td>
+</tr>
+<tr class="row-even"><td><p>Separacion (<em>gap</em>) entre particiones</p></td>
+<td><p>30 dias</p></td>
+</tr>
+<tr class="row-odd"><td><p>Horizonte de prediccion</p></td>
+<td><p>15 dias</p></td>
+</tr>
+<tr class="row-even"><td><p>Tolerancia de la banda de descarga efectiva</p></td>
+<td><p>±15 %</p></td>
+</tr>
+</tbody>
+</table>
+</section>
+<section id="entorno">
+<h3>Entorno<a class="headerlink" href="#entorno" title="Permalink to this heading">#</a></h3>
+<p>Entorno conda <code class="docutils literal notranslate"><span class="pre">ml_venv</span></code> sobre <strong>Python 3.9.23</strong>.</p>
+</section>
+<section id="archivo-de-dependencias">
+<h3>Archivo de dependencias<a class="headerlink" href="#archivo-de-dependencias" title="Permalink to this heading">#</a></h3>
+<p>Contenido literal de <code class="docutils literal notranslate"><span class="pre">requirements.txt</span></code>, con versiones fijadas:</p>
+<div class="highlight-text notranslate"><div class="highlight"><pre><span></span>numpy==1.25.2
+pandas==2.1.1
+scipy==1.11.2
+scikit-learn==1.3.0
+statsmodels==0.14.1
+matplotlib==3.7.2
+seaborn==0.12.2
+missingno==0.5.2
+jupyter-book==0.15.1
+</pre></div>
+</div>
+<p>Equivalente como <code class="docutils literal notranslate"><span class="pre">environment.yml</span></code>:</p>
+<div class="highlight-yaml notranslate"><div class="highlight"><pre><span></span><span class="nt">name</span><span class="p">:</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">ml_venv</span>
+<span class="nt">channels</span><span class="p">:</span><span class="w"> </span><span class="p p-Indicator">[</span><span class="nv">conda-forge</span><span class="p p-Indicator">,</span><span class="w"> </span><span class="nv">defaults</span><span class="p p-Indicator">]</span>
+<span class="nt">dependencies</span><span class="p">:</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">python=3.9</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pip</span>
+<span class="w">  </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="nt">pip</span><span class="p">:</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">numpy==1.25.2</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">pandas==2.1.1</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">scipy==1.11.2</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">scikit-learn==1.3.0</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">statsmodels==0.14.1</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">matplotlib==3.7.2</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">seaborn==0.12.2</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">missingno==0.5.2</span>
+<span class="w">      </span><span class="p p-Indicator">-</span><span class="w"> </span><span class="l l-Scalar l-Scalar-Plain">jupyter-book==0.15.1</span>
+</pre></div>
+</div>
+<p>La primera celda del informe imprime las versiones efectivamente utilizadas en la
+ejecucion, de modo que el registro de versiones queda incorporado a la salida.</p>
+</section>
+<section id="reproducir-el-analisis">
+<h3>Reproducir el analisis<a class="headerlink" href="#reproducir-el-analisis" title="Permalink to this heading">#</a></h3>
+<div class="highlight-bash notranslate"><div class="highlight"><pre><span></span>conda<span class="w"> </span>create<span class="w"> </span>-n<span class="w"> </span>ml_venv<span class="w"> </span><span class="nv">python</span><span class="o">=</span><span class="m">3</span>.9
+conda<span class="w"> </span>activate<span class="w"> </span>ml_venv
 pip<span class="w"> </span>install<span class="w"> </span>-r<span class="w"> </span>requirements.txt
 jupyter-book<span class="w"> </span>build<span class="w"> </span>.
 </pre></div>
 </div>
+<p>Los datos se obtienen segun el procedimiento descrito en <strong>Obtencion de los datos</strong>.</p>
+</section>
 </section>
 <div class="toctree-wrapper compound">
 </div>
@@ -446,7 +524,13 @@ jupyter-book<span class="w"> </span>build<span class="w"> </span>.
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#tema">Tema</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#ruta-metodologica">Ruta metodologica</a></li>
 <li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#estructura-del-informe">Estructura del informe</a></li>
-<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reproducibilidad">Reproducibilidad</a></li>
+<li class="toc-h2 nav-item toc-entry"><a class="reference internal nav-link" href="#reproducibilidad">Reproducibilidad</a><ul class="nav section-nav flex-column">
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#semillas-aleatorias">Semillas aleatorias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#entorno">Entorno</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#archivo-de-dependencias">Archivo de dependencias</a></li>
+<li class="toc-h3 nav-item toc-entry"><a class="reference internal nav-link" href="#reproducir-el-analisis">Reproducir el analisis</a></li>
+</ul>
+</li>
 </ul>
   </nav></div>
 
