@@ -1,1 +1,1 @@
-import{b as a,c as b,d as c,f as d}from"C:/Program Files/Git/Proyecto_Magdalena_ML/build/_shared/chunk-J56WUMNK.js";import"C:/Program Files/Git/Proyecto_Magdalena_ML/build/_shared/chunk-RAQ24GF6.js";export{a as CONTINUE,b as EXIT,c as SKIP,d as visit};
+import{b as a,c as b,d as c,f as d}from"/Proyecto_Magdalena_ML/build/_shared/chunk-J56WUMNK.js";import"/Proyecto_Magdalena_ML/build/_shared/chunk-RAQ24GF6.js";export{a as CONTINUE,b as EXIT,c as SKIP,d as visit};

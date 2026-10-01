@@ -1,1 +1,1 @@
-import{a as r,b as e}from"C:/Program Files/Git/Proyecto_Magdalena_ML/build/_shared/chunk-AATLEN4A.js";import"C:/Program Files/Git/Proyecto_Magdalena_ML/build/_shared/chunk-GEZIJWLJ.js";import"C:/Program Files/Git/Proyecto_Magdalena_ML/build/_shared/chunk-RAQ24GF6.js";export{r as RadarModule,e as createRadarServices};
+import{a as r,b as e}from"/Proyecto_Magdalena_ML/build/_shared/chunk-AATLEN4A.js";import"/Proyecto_Magdalena_ML/build/_shared/chunk-GEZIJWLJ.js";import"/Proyecto_Magdalena_ML/build/_shared/chunk-RAQ24GF6.js";export{r as RadarModule,e as createRadarServices};

@@ -1,1 +1,1 @@
-import{a}from"C:/Program Files/Git/Proyecto_Magdalena_ML/build/_shared/chunk-Z7LJC5RR.js";import"C:/Program Files/Git/Proyecto_Magdalena_ML/build/_shared/chunk-DEQLTPBL.js";import"C:/Program Files/Git/Proyecto_Magdalena_ML/build/_shared/chunk-RAQ24GF6.js";export default a();
+import{a}from"/Proyecto_Magdalena_ML/build/_shared/chunk-Z7LJC5RR.js";import"/Proyecto_Magdalena_ML/build/_shared/chunk-DEQLTPBL.js";import"/Proyecto_Magdalena_ML/build/_shared/chunk-RAQ24GF6.js";export default a();

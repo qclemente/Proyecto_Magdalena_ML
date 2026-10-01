@@ -1,1 +1,1 @@
-import{a,b,c,d,e}from"C:/Program Files/Git/Proyecto_Magdalena_ML/build/_shared/chunk-L4B4KBGY.js";import"C:/Program Files/Git/Proyecto_Magdalena_ML/build/_shared/chunk-RAQ24GF6.js";e();export{a as javascript,b as json,c as jsonld,d as typescript};
+import{a,b,c,d,e}from"/Proyecto_Magdalena_ML/build/_shared/chunk-L4B4KBGY.js";import"/Proyecto_Magdalena_ML/build/_shared/chunk-RAQ24GF6.js";e();export{a as javascript,b as json,c as jsonld,d as typescript};
