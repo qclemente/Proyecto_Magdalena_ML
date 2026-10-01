@@ -1,0 +1,1 @@
+import{a as e,b as r}from"C:/Program Files/Git/Proyecto_Magdalena_ML/build/_shared/chunk-7FGDXJSL.js";import"C:/Program Files/Git/Proyecto_Magdalena_ML/build/_shared/chunk-GEZIJWLJ.js";import"C:/Program Files/Git/Proyecto_Magdalena_ML/build/_shared/chunk-RAQ24GF6.js";export{e as ArchitectureModule,r as createArchitectureServices};
