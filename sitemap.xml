@@ -5,9 +5,6 @@
     <loc>http://localhost:3000</loc>
   </url>
   <url>
-    <loc>http://localhost:3000/proyecto</loc>
-  </url>
-  <url>
     <loc>http://localhost:3000/descarga-datos</loc>
   </url>
 </urlset>
