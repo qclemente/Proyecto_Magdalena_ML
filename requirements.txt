@@ -1,0 +1,30 @@
+# Dependencias del proyecto - Entregable 1
+# Entorno: conda env "ml_venv", Python 3.9.23
+# Actualizado: 30 de septiembre de 2026
+#
+# Reproduccion del entorno:
+#   conda create -n ml_venv python=3.9
+#   conda activate ml_venv
+#   pip install -r requirements.txt
+#
+# El libro se compila con MyST (Jupyter Book 2), que requiere Node.js
+# instalado en el sistema (probado con Node v24.14.1).
+
+# --- analisis de datos ---
+numpy==1.25.2
+pandas==2.1.1
+scipy==1.11.2
+
+# --- modelado y estadistica ---
+scikit-learn==1.3.0
+statsmodels==0.14.1
+
+# --- visualizacion ---
+matplotlib==3.7.2
+seaborn==0.12.2
+missingno==0.5.2
+
+# --- notebook y publicacion ---
+ipykernel==6.25.1
+nbformat==5.9.2
+mystmd==1.11.0

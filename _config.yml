@@ -1,0 +1,48 @@
+# Configuracion del Jupyter Book
+# Documentacion: https://jupyterbook.org/customize/config.html
+
+title: "Descarga efectiva y transporte de sedimentos en el rio Magdalena"
+author: "Kevin Clemente y Manuel Meza"
+copyright: "2026"
+logo: ""
+
+# Ejecutar los notebooks al compilar el libro.
+# "cache" solo re-ejecuta lo que cambio; "force" re-ejecuta todo; "off" no ejecuta.
+execute:
+  execute_notebooks: 'off'
+  timeout: 600
+  allow_errors: false
+
+# Numeracion automatica de secciones y figuras
+sphinx:
+  config:
+    numfig: true
+    language: es
+    html_show_copyright: false
+
+# Soporte para LaTeX en el texto
+parse:
+  myst_enable_extensions:
+    - amsmath
+    - dollarmath
+    - colon_fence
+    - deflist
+
+# Botones de interaccion
+html:
+  use_issues_button: false
+  use_repository_button: false
+  home_page_in_navbar: true
+
+# Bibliografia (opcional, si citas literatura)
+bibtex_bibfiles:
+  - referencias.bib
+
+# Archivos que NO forman parte del libro
+exclude_patterns:
+  - README.md
+  - _build
+  - datos
+  - .ipynb_checkpoints
+  - _parte*.ipynb
+  - _p12.ipynb
