@@ -1,0 +1,23 @@
+# Entorno conda equivalente a requirements.txt
+# El libro se compila con MyST (Jupyter Book 2), que requiere Node.js
+# instalado en el sistema (probado con Node v24.14.1).
+name: ml_venv
+channels:
+  - conda-forge
+  - defaults
+dependencies:
+  - python=3.9
+  - nodejs
+  - pip
+  - pip:
+      - numpy==1.25.2
+      - pandas==2.1.1
+      - scipy==1.11.2
+      - scikit-learn==1.3.0
+      - statsmodels==0.14.1
+      - matplotlib==3.7.2
+      - seaborn==0.12.2
+      - missingno==0.5.2
+      - ipykernel==6.25.1
+      - nbformat==5.9.2
+      - mystmd==1.11.0

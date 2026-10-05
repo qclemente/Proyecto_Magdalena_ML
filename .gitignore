@@ -1,0 +1,28 @@
+# Jupyter
+.ipynb_checkpoints/
+**/.ipynb_checkpoints/
+__pycache__/
+*.pyc
+
+# Build del Jupyter Book (se publica aparte con ghp-import)
+_build/
+
+# Datos intermedios generados por el notebook
+datos/procesados/
+
+# Datos crudos de IDEAM: NO se redistribuyen.
+# La licencia del portal DHIME autoriza la descarga para uso personal y
+# privado, pero no concede derechos de republicacion. Ver DESCARGA_DATOS.md
+# para reproducir la descarga exacta.
+datos/crudos/
+
+# El catalogo de estaciones SI se versiona: son 7 filas de metadatos
+# necesarias para documentar el area de estudio.
+!datos/UBICACION_ESTACIONES_DESCARGADAS_IDEAM.*
+_build/
+.myst.yml.lock
+
+# Figuras exportadas: se regeneran al ejecutar el notebook,
+# que ademas ya las lleva embebidas en sus salidas.
+figuras/
+datos/procesados/

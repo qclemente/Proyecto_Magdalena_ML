@@ -1,0 +1,45 @@
+# Configuracion de MyST (Jupyter Book 2)
+version: 1
+project:
+  id: proyecto-magdalena-ml
+  title: "Proyecto de investigacion: descarga efectiva en el rio Magdalena"
+  short_title: "Descarga efectiva - Magdalena"
+  description: >-
+    Clasificacion de los dias de descarga efectiva en el rio Magdalena
+    a partir del registro hidrologico del IDEAM.
+  authors:
+    - name: Kevin Clemente Rosario
+    - name: Manuel Meza
+  keywords:
+    - hidrologia
+    - transporte de sedimentos
+    - descarga efectiva
+    - rio Magdalena
+    - machine learning
+  github: https://github.com/qclemente/Proyecto_Magdalena_ML
+  toc:
+    - file: 01_generalidades.md
+      title: "1. Generalidades"
+    - file: 02_base_de_datos.ipynb
+      title: "2. Base de datos"
+    - file: 03_eda.ipynb
+      title: "3. Análisis exploratorio"
+    - file: 04_modelo_base.ipynb
+      title: "4. Modelo base"
+    - file: 05_conclusiones.md
+      title: "5. Conclusiones"
+    - file: DESCARGA_DATOS.md
+      title: "Obtención de los datos"
+  numbering:
+    headings: false
+  exclude:
+    - _build/**
+    - intro.md
+    - proyecto.ipynb
+    - datos/crudos/**
+    - README.md
+site:
+  template: book-theme
+  options:
+    favicon: ""
+    logo_text: "Descarga efectiva - Rio Magdalena"
